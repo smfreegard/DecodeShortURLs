@@ -83,7 +83,7 @@ a good example from someone that does ;-)
 
 package Mail::SpamAssassin::Plugin::DecodeShortURLs;
 
-my $VERSION = 0.7;
+my $VERSION = 0.8;
 
 use Mail::SpamAssassin::Plugin;
 use strict;
@@ -235,6 +235,12 @@ If this option is enabled (set to 1), then short URLs and the decoded URLs will 
     type => $Mail::SpamAssassin::Conf::CONF_TYPE_BOOL
   });
 
+  push (@cmds, {
+    setting => 'log_target_only',
+    is_admin => 1,
+    default => 0,
+    type => $Mail::SpamAssassin::Conf::CONF_TYPE_BOOL
+  });
 
   $conf->{parser}->register_commands(\@cmds);
 }
@@ -255,6 +261,7 @@ sub parsed_metadata {
   ($self->{url_shortener_cache}) = ($pms->{main}->{conf}->{url_shortener_cache} =~ /^(.*)$/g);
   $self->{url_shortener_cache_ttl} = $pms->{main}->{conf}->{url_shortener_cache_ttl};
   $self->{url_shortener_syslog} = $pms->{main}->{conf}->{url_shortener_syslog};
+  $self->{log_target_only} = $pms->{main}->{conf}->{log_target_only};
 
   # Sort short URLs into hash to de-dup them
   my %short_urls;
@@ -390,7 +397,11 @@ sub recursive_lookup {
     dbg("Found cached $short_url => $location");
     eval {
       local $SIG{'__DIE__'};
-      $self->log_to_file("$short_url => $location")
+      if ($self->{log_target_only}) {
+        $self->log_to_file($location);
+      } else {
+        $self->log_to_file("$short_url => $location");
+      }
     } if $self->{logging};
     syslog('info',"Found cached $short_url => $location") if $self->{syslog};
   } else {
@@ -408,7 +419,11 @@ sub recursive_lookup {
     dbg("Found $short_url => $location");
     eval {
       local $SIG{'__DIE__'};
-      $self->log_to_file("$short_url => $location")
+      if ($self->{log_target_only}) {
+        $self->log_to_file($location);
+      } else {
+        $self->log_to_file("$short_url => $location");
+      }
     } if $self->{logging};
     syslog('info',"Found $short_url => $location") if $self->{syslog};
   }
@@ -498,7 +513,11 @@ sub log_to_file {
   eval {
     flock($fh, LOCK_EX) or die $!;
     seek($fh, 0, SEEK_END) or die $!;
-    print $fh '['.time.'] '.$msg."\n";
+    if ($self->{log_target_only}) {
+        print $fh "$msg\n";
+    } else {
+        print $fh '['.time.'] '.$msg."\n";
+    }
     flock($fh, LOCK_UN) or die $!;
   };
 }
