@@ -42,9 +42,9 @@ meta SHORT_URIBL	HAS_SHORT_URL && (URIBL_BLACK || URIBL_AB_SURBL || URIBL_WS_SUR
 describe SHORT_URIBL	Message contains shortened URL(s) and also hits a URIDNSBL
 score SHORT_URIBL	0.01
 
-url_shortener_log /tmp/DecodeShortURLs.txt
+# url_shortener_log /tmp/DecodeShortURLs.txt
 url_shortener_cache /tmp/DecodeShortURLs.sq3
-#url_shortener_syslog 1
+# url_shortener_syslog 1
 
 # url_shortener tumblr.com
 # url_shortener url4.eu
