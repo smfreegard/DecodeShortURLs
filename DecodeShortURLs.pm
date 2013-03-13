@@ -83,7 +83,7 @@ a good example from someone that does ;-)
 
 package Mail::SpamAssassin::Plugin::DecodeShortURLs;
 
-my $VERSION = 0.6;
+my $VERSION = 0.7;
 
 use Mail::SpamAssassin::Plugin;
 use strict;
@@ -471,9 +471,13 @@ sub _add_uri_detail_list {
     [Mail::SpamAssassin::Util::uri_list_canonify (undef, $uri)];
 
   foreach (@{$info->{cleaned}}) {
-    my $dom = Mail::SpamAssassin::Util::uri_to_domain($_);
+    my ($dom, $host) = Mail::SpamAssassin::Util::uri_to_domain($_);
 
     if ($dom && !$info->{domains}->{$dom}) {
+      # 3.4 compatibility as per Marc Martinec
+      if ($host) {
+          $info->{hosts}->{$host} = $dom;
+      }
       $info->{domains}->{$dom} = 1;
       $pms->{uri_domain_count}++;
     }

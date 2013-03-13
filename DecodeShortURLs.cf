@@ -1,4 +1,6 @@
-loadplugin Mail::SpamAssassin::Plugin::DecodeShortURLs /etc/mail/spamassassin/DecodeShortURLs.pm
+loadplugin Mail::SpamAssassin::Plugin::DecodeShortURLs DecodeShortURLs.pm
+
+ifplugin Mail::SpamAssassin::Plugin::DecodeShortURLs
 
 body HAS_SHORT_URL	eval:short_url_tests()
 describe HAS_SHORT_URL	Message contains one or more shortened URLs
@@ -20,7 +22,7 @@ body SHORT_URL_404	eval:short_url_tests()
 describe SHORT_URL_404	Message has short URL that returns 404
 score SHORT_URL_404	1.0
 
-uri  URI_BITLY_BLOCKED	/^http:\/\/bit\.ly\/a\/warning/i
+uri  URI_BITLY_BLOCKED	/^http:\/\/(?:bit\.ly|bitly\.com)\/a\/warning/i
 describe URI_BITLY_BLOCKED Message contains a bit.ly URL that has been disabled due to abuse
 score URI_BITLY_BLOCKED 10.0
 
@@ -44,6 +46,9 @@ url_shortener_log /tmp/DecodeShortURLs.txt
 url_shortener_cache /tmp/DecodeShortURLs.sq3
 #url_shortener_syslog 1
 
+# url_shortener tumblr.com
+# url_shortener url4.eu
+# url_shortener youtu.be
 url_shortener 0rz.tw
 url_shortener 1l2.us
 url_shortener 1u.ro
@@ -59,10 +64,10 @@ url_shortener 3.ly
 url_shortener 301.to
 url_shortener 301url.com
 url_shortener 307.to
-# url_shortener 4sq.com
 url_shortener 6url.com
 url_shortener 7.ly
 url_shortener 9mp.com
+url_shortener sameurl.com
 url_shortener a.gd
 url_shortener a.gg
 url_shortener a.nf
@@ -91,6 +96,7 @@ url_shortener bacn.me
 url_shortener beam.to
 url_shortener bgl.me
 url_shortener bit.ly
+url_shortener bitly.com
 url_shortener bkite.com
 url_shortener blippr.com
 url_shortener bloat.me
@@ -115,6 +121,7 @@ url_shortener cliccami.info
 url_shortener clickthru.ca
 url_shortener clipurl.us
 url_shortener clk.my
+url_shortener cloaky.de
 url_shortener clop.in
 url_shortener clp.ly
 url_shortener coge.la
@@ -126,6 +133,7 @@ url_shortener curio.us
 url_shortener cuthut.com
 url_shortener cuturl.com
 url_shortener cuturls.com
+url_shortener db.tt
 url_shortener dealspl.us
 url_shortener decenturl.com
 url_shortener df9.net
@@ -163,6 +171,7 @@ url_shortener flq.us
 url_shortener fly2.ws
 url_shortener fon.gs
 url_shortener foxyurl.com
+url_shortener fur.ly
 url_shortener fuseurl.com
 url_shortener fwd4.me
 url_shortener fwdurl.net
@@ -171,16 +180,19 @@ url_shortener g8l.us
 url_shortener get-shorty.com
 url_shortener get-url.com
 url_shortener get.sh
+url_shortener geturl.us
 url_shortener gi.vc
 url_shortener gkurl.us
 url_shortener gl.am
 url_shortener go.9nl.com
 url_shortener go.to
 url_shortener go2.me
+url_shortener gog.li
 url_shortener golmao.com
 url_shortener goo.gl
 url_shortener good.ly
 url_shortener goshrink.com
+url_shortener gplus.to
 url_shortener gri.ms
 url_shortener gurl.es
 url_shortener hao.jp
@@ -188,6 +200,7 @@ url_shortener hellotxt.com
 url_shortener hex.io
 url_shortener hiderefer.com
 url_shortener hop.im
+url_shortener hopclicks.com
 url_shortener hotredirect.com
 url_shortener hotshorturl.com
 url_shortener href.in
@@ -207,6 +220,7 @@ url_shortener is.gd
 url_shortener iscool.net
 url_shortener it2.in
 url_shortener ito.mx
+url_shortener itsy.it
 url_shortener j.mp
 url_shortener j2j.de
 url_shortener jdem.cz
@@ -224,6 +238,7 @@ url_shortener kots.nu
 url_shortener krz.ch
 url_shortener ktzr.us
 url_shortener kxk.me
+url_shortener l.hh.de
 url_shortener l.pr
 url_shortener l9k.net
 url_shortener liip.to
@@ -255,6 +270,7 @@ url_shortener lt.tl
 url_shortener lu.to
 url_shortener lurl.no
 url_shortener mavrev.com
+url_shortener mcaf.ee
 url_shortener memurl.com
 url_shortener merky.de
 url_shortener metamark.net
@@ -360,7 +376,6 @@ url_shortener s7y.us
 url_shortener safe.mn
 url_shortener safelinks.ru
 url_shortener sai.ly
-url_shortener SameURL.com
 url_shortener sfu.ca
 url_shortener shadyurl.com
 url_shortener shar.es
@@ -428,6 +443,7 @@ url_shortener sturly.com
 url_shortener su.pr
 url_shortener surl.co.uk
 url_shortener surl.it
+url_shortener t.cn
 url_shortener t.co
 url_shortener t.lh.com
 url_shortener ta.gd
@@ -471,7 +487,6 @@ url_shortener trunc.it
 url_shortener truncurl.com
 url_shortener tsort.us
 url_shortener tubeurl.com
-# url_shortener tumblr.com
 url_shortener turo.us
 url_shortener tw0.us
 url_shortener tw1.us
@@ -517,7 +532,6 @@ url_shortener url.go.it
 url_shortener url.ie
 url_shortener url.inc-x.eu
 url_shortener url.lotpatrol.com
-# url_shortener url4.eu
 url_shortener urlao.com
 url_shortener urlbee.com
 url_shortener urlborg.com
@@ -528,6 +542,7 @@ url_shortener urlcutter.com
 url_shortener urlg.info
 url_shortener urlhawk.com
 url_shortener urli.nl
+url_shortener urlin.it
 url_shortener urlkiss.com
 url_shortener urloo.com
 url_shortener urlpire.com
@@ -559,16 +574,32 @@ url_shortener wapurl.co.uk
 url_shortener webalias.com
 url_shortener welcome.to
 url_shortener wh.gov
+url_shortener widg.me
 url_shortener wipi.es
 url_shortener wkrg.com
 url_shortener woo.ly
 url_shortener wp.me
+url_shortener x.co
 url_shortener x.hypem.com
 url_shortener x.se
 url_shortener x.vu
 url_shortener xeeurl.com
 url_shortener xil.in
 url_shortener xlurl.de
+url_shortener xn--1ci.ws
+url_shortener xn--3fi.ws
+url_shortener xn--5gi.ws
+url_shortener xn--9gi.ws
+url_shortener xn--bih.ws
+url_shortener xn--cwg.ws
+url_shortener xn--egi.ws
+url_shortener xn--fwg.ws
+url_shortener xn--hgi.ws
+url_shortener xn--l3h.ws
+url_shortener xn--odi.ws
+url_shortener xn--ogi.ws
+url_shortener xn--rei.ws
+url_shortener xn--vgi.ws
 url_shortener xr.com
 url_shortener xrl.in
 url_shortener xrl.us
@@ -576,10 +607,10 @@ url_shortener xrt.me
 url_shortener xurl.jp
 url_shortener xxsurl.de
 url_shortener xzb.cc
+url_shortener y.ahoo.it
 url_shortener yatuc.com
 url_shortener ye-s.com
 url_shortener yep.it
-# url_shortener youtu.be
 url_shortener z.pe
 url_shortener zapt.in
 url_shortener zi.ma
@@ -592,19 +623,5 @@ url_shortener zud.me
 url_shortener zurl.ws
 url_shortener zz.gd
 url_shortener zzang.kr
-url_shortener xn--cwg.ws
-url_shortener xn--fwg.ws
-url_shortener xn--bih.ws
-url_shortener xn--l3h.ws
-url_shortener xn--1ci.ws
-url_shortener xn--odi.ws
-url_shortener xn--rei.ws
-url_shortener xn--3fi.ws
-url_shortener xn--egi.ws
-url_shortener xn--hgi.ws
-url_shortener xn--ogi.ws
-url_shortener xn--vgi.ws
-url_shortener xn--5gi.ws
-url_shortener xn--9gi.ws
-url_shortener x.co
-url_shortener goo.gl
+
+endif

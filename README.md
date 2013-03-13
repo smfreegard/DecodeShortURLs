@@ -1,6 +1,8 @@
 DecodeShortURLs
 ===============
 
+This is a plugin for SpamAssassin.
+
 This plugin looks for URLs shortened by a list of URL shortening services and
 upon finding a matching URL will connect using to the shortening service and
 do an HTTP HEAD lookup and retrieve the location header which points to the 
