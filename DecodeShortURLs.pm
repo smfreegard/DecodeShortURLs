@@ -83,7 +83,7 @@ a good example from someone that does ;-)
 
 package Mail::SpamAssassin::Plugin::DecodeShortURLs;
 
-my $VERSION = 0.8;
+my $VERSION = 0.9;
 
 use Mail::SpamAssassin::Plugin;
 use strict;
@@ -276,7 +276,7 @@ sub parsed_metadata {
         # shortener to force this plug-in to follow a link that *isn't* on
         # the list of shorteners; we enforce that the shortener must be the
         # base URI and that a path must be present.
-        if ($uri !~ /^http:\/\/(?:www\.)?$_\/.+$/) {
+        if ($uri !~ /^http:\/\/(?:www\.)?$_\/.+$/i) {
           dbg("Discarding URI: $uri");
           next;
         }
