@@ -83,7 +83,7 @@ a good example from someone that does ;-)
 
 package Mail::SpamAssassin::Plugin::DecodeShortURLs;
 
-my $VERSION = 0.9;
+my $VERSION = 0.10;
 
 use Mail::SpamAssassin::Plugin;
 use strict;
@@ -528,7 +528,7 @@ sub cache_add {
 
   eval {
     $self->{sth_insert} = $self->{dbh}->prepare_cached("
-      INSERT INTO short_url_cache (short_url, decoded_url)
+      INSERT OR IGNORE INTO short_url_cache (short_url, decoded_url)
       VALUES (?,?)
     ");
   };
