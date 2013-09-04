@@ -31,7 +31,7 @@ If a shortener returns a '404 Not Found' result for the short URL then the
 rule 'SHORT_URL_404' will be fired.
 
 If a shortener does not return an HTTP redirect, then a dynamic rule will
-be fired: 'SHORT_<SHORTENER>_<CODE>' where <SHORTENER> is the uppercase
+be fired: 'SHORT_\<SHORTENER\>_\<CODE\>' where \<SHORTENER\> is the uppercase
 name of the shortener with dots converted to underscores.  e.g.:
 'SHORT_T_CO_200' This is to handle the case of t.co which now returns an
 HTTP 200 and an abuse page instead of redirecting to an abuse page like
