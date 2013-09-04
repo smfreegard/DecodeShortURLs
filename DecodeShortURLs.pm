@@ -60,6 +60,13 @@ which point it will fire the rule 'SHORT_URL_MAXCHAIN' and go no further.
 If a shortener returns a '404 Not Found' result for the short URL then the 
 rule 'SHORT_URL_404' will be fired.
 
+If a shortener does not return an HTTP redirect, then a dynamic rule will
+be fired: 'SHORT_<SHORTENER>_<CODE>' where <SHORTENER> is the uppercase
+name of the shortener with dots converted to underscores.  e.g.:
+'SHORT_T_CO_200' This is to handle the case of t.co which now returns an 
+HTTP 200 and an abuse page instead of redirecting to an abuse page like
+every other shortener does...
+
 =head1 NOTES
 
 This plugin runs the parsed_metadata hook with a priority of -1 so that
@@ -83,7 +90,7 @@ a good example from someone that does ;-)
 
 package Mail::SpamAssassin::Plugin::DecodeShortURLs;
 
-my $VERSION = 0.10;
+my $VERSION = 0.11;
 
 use Mail::SpamAssassin::Plugin;
 use strict;
@@ -408,7 +415,16 @@ sub recursive_lookup {
     # Not cached; do lookup
     my $response = $self->{ua}->head($short_url);
     if (!$response->is_redirect) {
-      dbg("Skipping URL as not redirect: $short_url = ".$response->status_line);
+      dbg("URL is not redirect: $short_url = ".$response->status_line);
+      if ((my ($domain) = ($short_url =~ /^https?:\/\/(\S+)\//))) {
+          if (exists $self->{url_shorteners}->{$domain}) {
+              $domain =~ s/\./_/g;
+              $domain = uc($domain);
+              my $h = 'SHORT_' . $domain . '_' . $response->code;
+              dbg("hit rule: $h");
+              $pms->got_hit($h);
+          }
+      }
       $pms->got_hit('SHORT_URL_404') if($response->code == '404');
       return undef;
     }

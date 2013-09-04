@@ -22,6 +22,10 @@ body SHORT_URL_404	eval:short_url_tests()
 describe SHORT_URL_404	Message has short URL that returns 404
 score SHORT_URL_404	1.0
 
+body SHORT_T_CO_200     eval:short_url_tests()
+describe SHORT_T_CO_200 Message contains a t.co URL that has a warning due to abuse
+score SHORT_T_CO_200    10.0
+
 uri  URI_BITLY_BLOCKED	/^http:\/\/(?:bit\.ly|bitly\.com)\/a\/warning/i
 describe URI_BITLY_BLOCKED Message contains a bit.ly URL that has been disabled due to abuse
 score URI_BITLY_BLOCKED 10.0
