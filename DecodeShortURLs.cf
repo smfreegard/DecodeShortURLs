@@ -26,19 +26,19 @@ body SHORT_T_CO_200     eval:short_url_tests()
 describe SHORT_T_CO_200 Message contains a t.co URL that has a warning due to abuse
 score SHORT_T_CO_200    10.0
 
-uri  URI_BITLY_BLOCKED	/^http:\/\/(?:bit\.ly|bitly\.com)\/a\/warning/i
+uri  URI_BITLY_BLOCKED	/^https?:\/\/(?:bit\.ly|bitly\.com)\/a\/warning/i
 describe URI_BITLY_BLOCKED Message contains a bit.ly URL that has been disabled due to abuse
 score URI_BITLY_BLOCKED 10.0
 
-uri  URI_SIMURL_BLOCKED /^http:\/\/simurl\.com\/redirect_black\.php/i
+uri  URI_SIMURL_BLOCKED /^https?:\/\/simurl\.com\/redirect_black\.php/i
 describe URI_SIMURL_BLOCKED Message contains a simurl URL that has been disabled due to abuse
 score URI_SIMURL_BLOCKED 10.0
 
-uri  URI_MIGRE_BLOCKED /^http:\/\/migre\.me\/bloqueado/i
+uri  URI_MIGRE_BLOCKED /^https?:\/\/migre\.me\/bloqueado/i
 describe URI_MIGRE_BLOCKED Message contains a migre.me URL that has been disabled due to abuse
 score URI_MIGRE_BLOCKED 10.0 
 
-uri  URI_TINYURL_BLOCKED /^http:\/\/tinyurl\.com\/nospam\.php/i
+uri  URI_TINYURL_BLOCKED /^https?:\/\/tinyurl\.com\/nospam\.php/i
 describe URI_TINYURL_BLOCKED Message contains a tinyurl that has been disabled due to abuse
 score URI_TINYURL_BLOCKED 10.0
 
