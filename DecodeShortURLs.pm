@@ -129,6 +129,7 @@ sub new {
    $self->{ua}->{max_redirect} = 0;
    $self->{ua}->{timeout} = 5;
    $self->{ua}->env_proxy;
+   $self->{ua}->agent('Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:79.0) Gecko/20100101 Firefox/79.0');
    $self->{logging} = 0;
    $self->{caching} = 0;
    $self->{syslog} = 0;
