@@ -413,7 +413,7 @@ sub recursive_lookup {
     syslog('info',"Found cached $short_url => $location") if $self->{syslog};
   } else {
     # Not cached; do lookup
-    my $response = $self->{ua}->head($short_url);
+    my $response = $self->{ua}->get($short_url);
     if (!$response->is_redirect) {
       dbg("URL is not redirect: $short_url = ".$response->status_line);
       if ((my ($domain) = ($short_url =~ /^https?:\/\/(\S+)\//))) {
