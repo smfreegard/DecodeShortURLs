@@ -50,6 +50,7 @@ score SHORT_URIBL	0.01
 url_shortener_cache /tmp/DecodeShortURLs.sq3
 # url_shortener_syslog 1
 
+url_shortener 0.gp
 url_shortener 0rz.tw
 url_shortener 1l2.us
 url_shortener 1link.in
@@ -67,12 +68,19 @@ url_shortener 301.to
 url_shortener 301url.com
 url_shortener 307.to
 url_shortener 3.ly
+url_shortener 4.gp
+url_shortener 4.ly
 url_shortener 4ms.me
 url_shortener 4sq.com
 url_shortener 4url.cc
 url_shortener 42.no
+url_shortener 5.gp
+url_shortener 6.gp
+url_shortener 6.ly
 url_shortener 6url.com
 url_shortener 7.ly
+url_shortener 8.ly
+url_shortener 9.ly
 url_shortener 9mp.com
 url_shortener a2a.me
 url_shortener a2n.eu
@@ -238,6 +246,7 @@ url_shortener fuzzy.to
 url_shortener fwd4.me
 url_shortener fwdurl.net
 url_shortener fwib.net
+url_shortener g.asia
 url_shortener g8l.us
 url_shortener get.sh
 url_shortener get-shorty.com
@@ -245,6 +254,7 @@ url_shortener get-url.com
 url_shortener geturl.us
 url_shortener gg.gg
 url_shortener gi.vc
+url_shortener git.io
 url_shortener gizmo.do
 url_shortener gkurl.us
 url_shortener gl.am
@@ -431,6 +441,7 @@ url_shortener owl.li
 url_shortener ow.ly
 url_shortener o-x.fr
 url_shortener oxyz.info
+url_shortener p.asia
 url_shortener p8g.tw
 url_shortener packetlivesmatter.club
 url_shortener packetlivesmatter.online
@@ -548,6 +559,7 @@ url_shortener shrinkr.com
 url_shortener shrinkster.com
 url_shortener shrinkurl.us
 url_shortener shrten.com
+url_shortener shrunken.com
 url_shortener shrt.fr
 url_shortener shrtl.com
 url_shortener shrtn.com
@@ -703,6 +715,7 @@ url_shortener unfaker.it
 url_shortener u.nu
 url_shortener updating.me
 url_shortener ur1.ca
+url_shortener ur3.us
 url_shortener urizy.com
 url_shortener url360.me
 url_shortener url4.eu
